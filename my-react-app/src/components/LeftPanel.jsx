@@ -28,7 +28,7 @@ function LeftPanel() {
           </li>
           <li>
             <Link to="/edit-department">                 
-                <button  style={{ width: '100%', marginBottom: '1rem' }}>Edit Department</button>
+                <button  style={{ width: '100%', marginBottom: '1rem' }}>Add/Edit Department</button>
             </Link>
           </li>
         </ul>

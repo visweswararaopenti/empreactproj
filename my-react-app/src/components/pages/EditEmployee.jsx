@@ -14,6 +14,7 @@ function EditEmployee() {
       deptname: '',
     }
   });
+  
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
   const isEdit = !!empid && mode !== 'view';

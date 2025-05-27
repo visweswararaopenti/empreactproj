@@ -23,7 +23,7 @@ function App() {
               <Route path="/employee-list" element={<EmployeeList />} />
               <Route path="/edit-employee/:empid?/:mode?" element={<EditEmployee />} />
               <Route path="/department-list" element={<DepartmentList />} />
-              <Route path="/edit-department" element={<EditDepartment />} />
+              <Route path="/edit-department/:deptid?/:mode?" element={<EditDepartment />} />
             </Routes>
           </main>
         </div>
