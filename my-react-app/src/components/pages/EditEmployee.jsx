@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { addEmployee, getEmployeeById, updateEmployee } from '../../services/employeeService';
-import { useNavigate } from 'react-router-dom';
 
 function EditEmployee() {
   const { empid, mode } = useParams();
   const [form, setForm] = useState({
     empname: '',
+    email: '',
+    mobile: '',
     dob: '',
     dateOfJoining: '',
     department: {
@@ -14,7 +15,7 @@ function EditEmployee() {
       deptname: '',
     }
   });
-  
+
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
   const isEdit = !!empid && mode !== 'view';
@@ -64,22 +65,33 @@ function EditEmployee() {
         .catch(() => alert('Failed to update employee.'));
     } else {
       addEmployee(payload)
-        .then(() => alert('Employee added successfully!'))
+        .then(() => {
+          alert('Employee added successfully!');
+          navigate('/employee-list');
+        })
         .catch(() => alert('Failed to add employee.'));
     }
   };
 
   return (
     <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1> {isView ? 'View Employee' : isEdit ? 'Edit Employee' : 'Add Employee'}</h1>
-        <input type='button' value='Employee List' onClick={() => navigate('/employee-list')} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1>{isView ? 'View Employee' : isEdit ? 'Edit Employee' : 'Add Employee'}</h1>
+        <input type="button" value="Employee List" onClick={() => navigate('/employee-list')} />
       </div>
-     
+
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name: </label>
           <input name="empname" value={form.empname} onChange={handleChange} readOnly={isView} required />
+        </div>
+        <div>
+          <label>Email: </label>
+          <input name="email" type="email" value={form.email} onChange={handleChange} readOnly={isView} required />
+        </div>
+        <div>
+          <label>Mobile: </label>
+          <input name="mobile" type="tel" value={form.mobile} onChange={handleChange} readOnly={isView} required />
         </div>
         <div>
           <label>Date of Birth: </label>
@@ -97,11 +109,11 @@ function EditEmployee() {
           <label>Department Name: </label>
           <input name="deptname" value={form.department.deptname} onChange={handleChange} readOnly={isView} required />
         </div>
-        { !isView && (
+        {!isView && (
           <button type="submit">{isEdit ? 'Update Employee' : 'Add Employee'}</button>
-        )
-        }
+        )}
       </form>
+
       {message && <p>{message}</p>}
     </div>
   );
