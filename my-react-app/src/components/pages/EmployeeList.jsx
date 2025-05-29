@@ -27,8 +27,6 @@ function EmployeeList() {
     }
   };
 
-  //if (loading) return <div>Loading...</div>;
-
   return (
     <div>
       {loading ? <div>Loading...</div> : null}
@@ -44,6 +42,8 @@ function EmployeeList() {
             <tr>
               <th>ID</th>
               <th>Name</th>
+              <th>Email</th>
+              <th>Mobile</th>
               <th>DOB</th>
               <th>Date of Joining</th>
               <th>Department</th>
@@ -55,6 +55,8 @@ function EmployeeList() {
               <tr key={emp.empid}>
                 <td>{emp.empid}</td>
                 <td>{emp.empname}</td>
+                <td>{emp.email}</td>
+                <td>{emp.mobile}</td>
                 <td>{emp.dob}</td>
                 <td>{emp.dateOfJoining}</td>
                 <td>{emp.department?.deptname}</td>
